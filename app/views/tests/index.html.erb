@@ -1,0 +1,21 @@
+<% require 'benchmark' %>
+  <% Benchmark.bm do |x| %>
+    <% x.report "raw" do %>
+      <% 10.times do %>
+        <%= render 'raw' %>
+      <% end %>
+    <% end %>
+
+    <% x.report "simple_form" do %>
+      <% 10.times do %>
+        <%= render 'simple_form' %>
+      <% end %>
+    <% end %>
+
+
+    <% x.report "view_component" do %>
+      <% 10.times do -%>
+        <%= render 'view_component' %>
+      <% end %>
+    <% end %>
+ <% end %>

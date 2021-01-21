@@ -52,5 +52,7 @@ group :test do
   gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'slim-rails', '3.2.0' # lightweight HTML templating language, replacing ERB or Haml
+gem 'simple_form', '5.0.2' # rails forms made easier
+gem "view_component", require: "view_component/engine"
+
