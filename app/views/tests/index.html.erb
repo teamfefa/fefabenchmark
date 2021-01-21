@@ -1,21 +1,31 @@
 <% require 'benchmark' %>
   <% Benchmark.bm do |x| %>
     <% x.report "raw" do %>
-      <% 10.times do %>
-        <%= render 'raw' %>
+      <% 10_000.times do %>
+        <%= form_with url: "/search", method: :get do |form| %>
+          <%= form.label :query, "Search for:" %>
+          <%= form.text_field :query %>
+          <%= form.submit "Search" %>
+        <% end %>
       <% end %>
     <% end %>
 
     <% x.report "simple_form" do %>
-      <% 10.times do %>
-        <%= render 'simple_form' %>
+      <% 10_000.times do %>
+        <%= simple_form_for :search, url: "search", :method => :get  do |f| %>
+          <%= f.input :query, laberl: "Search for:" %>
+          <%= f.submit "Search" %>
+        <% end %>
       <% end %>
     <% end %>
 
 
     <% x.report "view_component" do %>
-      <% 10.times do -%>
-        <%= render 'view_component' %>
+      <% 10_000.times do -%>
+        <%= simple_form_for :search, url: "search", :method => :get  do |f| %>
+          <%= render(FormComponent.new(f:f)) %>
+          <%= f.submit "Search" %>
+        <% end %>
       <% end %>
     <% end %>
  <% end %>
